@@ -989,23 +989,49 @@
 
     @media (max-width: 850px) {
       :root {
-        --header-h: 68px;
+        --header-h: 110px;
       }
 
-      .site-header {
-        grid-template-columns: 1fr;
-        padding: 0 18px;
-      }
+     .site-header {
+    height: auto;
+    min-height: 68px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 68px 42px;
+    gap: 0;
+    padding: 0 18px;
+}
 
       .brand-logo {
         width: 205px;
         height: 50px;
       }
 
-      .main-nav {
-        display: none;
-      }
+     .main-nav {
+    display: flex;
+    width: 100%;
+    height: 42px;
+    gap: 18px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    align-items: center;
+    scrollbar-width: none;
+    padding: 0 4px;
+}
 
+.main-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-link {
+    flex: 0 0 auto;
+    height: 42px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.nav-link.active::after {
+    bottom: 2px;
+}
       .explorer-shell {
         display: block;
       }
