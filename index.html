@@ -3,34 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Interactive Tokyo American Club facility directory and floor explorer."
+  />
 
-  <title>Explore TAC</title>
+  <title>Explore the Club | Tokyo American Club</title>
 
   <style>
+    /* =========================================================
+       TOKYO AMERICAN CLUB — INTERACTIVE FACILITY EXPLORER
+       Premium single-file GitHub Pages build
+       ========================================================= */
+
+    :root {
+      --navy-950: #081b31;
+      --navy-900: #0d2948;
+      --navy-800: #173a60;
+      --navy-700: #24527f;
+
+      --red-700: #9d2632;
+      --red-600: #b3303d;
+      --red-100: #f7e9eb;
+
+      --blue-600: #326da5;
+      --blue-500: #4b84b6;
+      --blue-100: #e8f1f8;
+
+      --ivory: #f8f5ef;
+      --cream: #fcfaf6;
+      --white: #ffffff;
+
+      --ink: #1f2730;
+      --muted: #68737d;
+      --soft-muted: #8d969e;
+
+      --line: #ded9d0;
+      --line-dark: #c9c2b7;
+
+      --dining: #aa2e37;
+      --fitness: #173a60;
+      --recreation: #3c73a8;
+      --events: #66517d;
+      --family: #c34856;
+      --services: #69747c;
+
+      --shadow-sm: 0 4px 14px rgba(13, 41, 72, 0.08);
+      --shadow-md: 0 12px 32px rgba(13, 41, 72, 0.11);
+      --shadow-lg: 0 22px 60px rgba(13, 41, 72, 0.16);
+
+      --header-height: 78px;
+      --sidebar-width: 286px;
+
+      --transition: 180ms ease;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    :root {
-      --navy: #16324f;
-      --navy-dark: #0f253b;
-      --blue: #4f8fbe;
-      --blue-light: #dcebf5;
-      --background: #f4f6f8;
-      --white: #ffffff;
-      --text: #1d2935;
-      --muted: #667788;
-      --border: #dce2e7;
-      --shadow: 0 12px 35px rgba(20, 45, 70, 0.12);
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--background);
-      color: var(--text);
+      min-width: 320px;
       min-height: 100vh;
+      background:
+        radial-gradient(circle at 68% 12%, rgba(255,255,255,.85), transparent 34%),
+        linear-gradient(180deg, #fbfaf7 0%, var(--ivory) 100%);
+      color: var(--ink);
+      font-family:
+        "Helvetica Neue",
+        "Avenir Next",
+        Arial,
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     button,
@@ -42,544 +93,1167 @@
       cursor: pointer;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-    header {
-      height: 84px;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
+    .serif {
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .site-header {
+      height: var(--header-height);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 36px;
+      gap: 28px;
+      padding: 0 34px;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid rgba(222,217,208,.9);
+      backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+      min-width: 310px;
+      color: var(--navy-950);
+      text-decoration: none;
     }
 
-    .logo-placeholder {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: var(--navy);
-      color: white;
+    .logo-wrap {
+      width: 42px;
+      height: 48px;
+      flex: 0 0 auto;
+      position: relative;
+    }
+
+    .real-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-fallback {
+      width: 42px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      letter-spacing: 1px;
-      font-size: 14px;
-    }
-
-    .brand-text h1 {
-      font-size: 21px;
-      color: var(--navy);
-      margin-bottom: 3px;
-    }
-
-    .brand-text p {
+      border: 2px solid var(--navy-900);
+      border-radius: 3px 3px 14px 14px;
+      color: var(--navy-900);
+      font-family: Georgia, serif;
       font-size: 12px;
-      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: -.03em;
     }
 
-    .header-right {
+    .brand-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      letter-spacing: .025em;
+      white-space: nowrap;
+    }
+
+    .main-nav {
       display: flex;
-      gap: 10px;
-      align-items: center;
+      align-items: stretch;
+      justify-content: flex-end;
+      gap: 22px;
+      height: 100%;
     }
 
-    .header-button {
-      border: 1px solid var(--border);
-      background: var(--white);
-      color: var(--navy);
-      border-radius: 10px;
-      padding: 10px 15px;
-      font-weight: 600;
+    .nav-link {
+      position: relative;
+      border: 0;
+      background: transparent;
+      color: #162334;
+      font-size: 14px;
+      padding: 0 2px;
+      transition: color var(--transition);
     }
 
-    /* =========================
-       MAIN LAYOUT
-    ========================= */
+    .nav-link:hover {
+      color: var(--red-700);
+    }
 
-    .app {
+    .nav-link.active {
+      color: var(--navy-950);
+      font-weight: 700;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 14px;
+      height: 3px;
+      background: var(--red-600);
+      border-radius: 100px;
+    }
+
+    /* =========================================================
+       EXPLORER LAYOUT
+       ========================================================= */
+
+    .explorer-shell {
       display: grid;
-      grid-template-columns: 280px 1fr;
-      min-height: calc(100vh - 84px);
+      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+      min-height: calc(100vh - var(--header-height));
     }
 
-    /* =========================
+    /* =========================================================
        SIDEBAR
-    ========================= */
+       ========================================================= */
 
     .sidebar {
-      background: var(--white);
-      border-right: 1px solid var(--border);
-      padding: 28px 22px;
+      padding: 38px 34px 30px;
+      background: rgba(255,255,255,.55);
+      border-right: 1px solid var(--line);
+      min-height: calc(100vh - var(--header-height));
       position: sticky;
-      top: 84px;
-      height: calc(100vh - 84px);
+      top: var(--header-height);
+      align-self: start;
+      max-height: calc(100vh - var(--header-height));
       overflow-y: auto;
     }
 
-    .sidebar-title {
-      color: var(--navy);
-      font-size: 14px;
-      letter-spacing: 0.05em;
+    .eyebrow {
+      margin-bottom: 10px;
+      color: var(--red-700);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      margin-bottom: 14px;
     }
 
-    .floor-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 28px;
+    .sidebar-title {
+      margin-bottom: 14px;
+      color: var(--navy-950);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 37px;
+      line-height: 1.04;
+      font-weight: 400;
+      letter-spacing: -.025em;
+    }
+
+    .sidebar-copy {
+      margin-bottom: 22px;
+      color: #56616b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .how-button,
+    .building-button {
+      border-radius: 5px;
+      font-weight: 700;
+      letter-spacing: .055em;
+      font-size: 11px;
+      transition:
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
+    }
+
+    .how-button {
+      margin-bottom: 34px;
+      padding: 10px 14px;
+      border: 1px solid var(--navy-900);
+      background: var(--navy-900);
+      color: white;
+    }
+
+    .how-button:hover {
+      background: var(--red-700);
+      border-color: var(--red-700);
+      transform: translateY(-1px);
+    }
+
+    .sidebar-label {
+      margin-bottom: 11px;
+      color: #5a6269;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .floor-selector {
+      margin-bottom: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line-dark);
+      border-radius: 6px;
+      background: white;
     }
 
     .floor-button {
       width: 100%;
-      border: 1px solid transparent;
-      background: transparent;
-      border-radius: 10px;
-      padding: 12px 14px;
-      text-align: left;
-      color: #49596a;
-      transition: 0.2s ease;
-      font-weight: 600;
+      height: 42px;
+      border: 0;
+      border-bottom: 1px solid #e8e3dc;
+      background: white;
+      color: var(--navy-900);
+      font-size: 13px;
+      font-weight: 700;
+      transition:
+        background var(--transition),
+        color var(--transition);
+    }
+
+    .floor-button:last-child {
+      border-bottom: 0;
     }
 
     .floor-button:hover {
-      background: #f0f5f8;
-      color: var(--navy);
+      background: #f4f1ec;
     }
 
     .floor-button.active {
-      background: var(--navy);
+      background: linear-gradient(90deg, var(--red-700), var(--red-600));
       color: white;
     }
 
-    .overview-button {
+    .building-button {
       width: 100%;
-      border: 1px solid var(--navy);
-      background: white;
-      color: var(--navy);
-      border-radius: 10px;
-      padding: 12px;
-      font-weight: 700;
-      margin-bottom: 28px;
+      padding: 11px 10px;
+      border: 1px solid var(--navy-900);
+      background: transparent;
+      color: var(--navy-900);
     }
 
-    .legend {
+    .building-button:hover {
+      background: var(--navy-900);
+      color: white;
+    }
+
+    /* =========================================================
+       MAIN
+       ========================================================= */
+
+    .explorer-main {
+      min-width: 0;
+      padding: 35px 34px 24px;
+    }
+
+    .explorer-toolbar {
+      display: grid;
+      grid-template-columns: 150px minmax(0,1fr);
+      align-items: start;
+      gap: 28px;
+      margin-bottom: 18px;
+    }
+
+    .floor-heading {
+      color: #343a40;
+      font-size: 62px;
+      line-height: .9;
+      font-weight: 500;
+      letter-spacing: -.055em;
+    }
+
+    .toolbar-center {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-    }
-
-    .legend-item {
-      display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--muted);
+      gap: 15px;
     }
 
-    .legend-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--blue);
-      border: 2px solid white;
-      box-shadow: 0 0 0 1px var(--blue);
-      flex-shrink: 0;
-    }
-
-    /* =========================
-       CONTENT
-    ========================= */
-
-    .content {
-      padding: 34px;
-      min-width: 0;
-    }
-
-    .content-top {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 22px;
-    }
-
-    .floor-heading p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .floor-heading h2 {
-      font-size: 42px;
-      color: var(--navy);
-      letter-spacing: -0.04em;
-    }
-
-    .search-area {
-      width: min(400px, 100%);
+    .search-shell {
+      width: min(440px, 100%);
       position: relative;
     }
 
-    .search-area input {
+    .search-shell input {
       width: 100%;
-      height: 46px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: white;
-      padding: 0 16px;
+      height: 43px;
+      padding: 0 46px 0 17px;
+      border: 1px solid #cac4bc;
+      border-radius: 999px;
+      background: rgba(255,255,255,.86);
+      color: var(--ink);
       outline: none;
+      font-size: 12px;
+      transition:
+        border var(--transition),
+        box-shadow var(--transition);
     }
 
-    .search-area input:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(79, 143, 190, 0.15);
+    .search-shell input:focus {
+      border-color: var(--navy-700);
+      box-shadow: 0 0 0 4px rgba(36,82,127,.08);
     }
 
-    /* =========================
-       CATEGORY FILTERS
-    ========================= */
+    .search-icon {
+      position: absolute;
+      right: 17px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--navy-900);
+      width: 18px;
+      height: 18px;
+      pointer-events: none;
+    }
+
+    .search-results {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      z-index: 500;
+      max-height: 320px;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .search-result {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 13px;
+      border: 0;
+      border-bottom: 1px solid #eeeae4;
+      background: white;
+      text-align: left;
+    }
+
+    .search-result:last-child {
+      border-bottom: 0;
+    }
+
+    .search-result:hover {
+      background: #f8f6f2;
+    }
+
+    .search-result-name {
+      color: var(--navy-900);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .search-result-floor {
+      color: var(--muted);
+      font-size: 11px;
+    }
 
     .filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
+      justify-content: center;
+      gap: 7px;
     }
 
     .filter-button {
-      border: 1px solid var(--border);
-      background: white;
-      color: #506070;
-      padding: 9px 14px;
+      padding: 8px 14px;
+      border: 1px solid #cbc5bd;
       border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
+      background: rgba(255,255,255,.78);
+      color: #2f363d;
+      font-size: 11px;
+      transition:
+        color var(--transition),
+        background var(--transition),
+        border var(--transition),
+        transform var(--transition);
+    }
+
+    .filter-button:hover {
+      border-color: var(--navy-700);
+      transform: translateY(-1px);
     }
 
     .filter-button.active {
-      background: var(--blue-light);
-      color: var(--navy);
-      border-color: #b9d7e9;
+      border-color: var(--navy-900);
+      background: var(--navy-900);
+      color: white;
     }
 
-    /* =========================
-       MAP CARD
-    ========================= */
+    /* =========================================================
+       MAP LAYOUT
+       ========================================================= */
 
-    .map-card {
-      background: white;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      overflow: hidden;
+    .map-layout {
+      display: grid;
+      grid-template-columns: 128px minmax(400px, 1fr) 330px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .legend {
+      padding-top: 4px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 9px;
+      color: #34444e;
+      font-size: 12px;
+    }
+
+    .legend-icon {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border: 2px solid white;
+      border-radius: 50%;
+      color: white;
+      box-shadow: 0 2px 7px rgba(0,0,0,.12);
+    }
+
+    .legend-icon svg,
+    .marker svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* =========================================================
+       MAP VIEWPORT
+       ========================================================= */
+
+    .map-frame {
+      min-width: 0;
       position: relative;
     }
 
-    .map-toolbar {
-      height: 56px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 18px;
-      border-bottom: 1px solid var(--border);
+    .map-viewport {
+      height: 685px;
+      position: relative;
+      overflow: auto;
+      border-radius: 8px;
+      cursor: grab;
+      scrollbar-color: #b7b1aa transparent;
+      scrollbar-width: thin;
     }
 
-    .map-toolbar-left {
+    .map-viewport.dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .map-stage-wrapper {
+      min-width: 100%;
+      min-height: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12px 12px 52px;
+    }
+
+    .map-stage {
+      width: min(900px, 100%);
+      position: relative;
+      flex: 0 0 auto;
+      transform-origin: top center;
+      transition: transform 120ms ease;
+    }
+
+    .floor-plan {
+      width: 100%;
+      height: auto;
+      display: block;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 6px 8px rgba(22,42,61,.08));
+    }
+
+    .map-loading {
+      min-height: 460px;
+      display: grid;
+      place-items: center;
       color: var(--muted);
       font-size: 13px;
     }
 
-    .zoom-controls {
+    /* =========================================================
+       FACILITY MARKERS
+       ========================================================= */
+
+    .marker {
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      transform: translate(-50%,-50%);
+      border: 3px solid white;
+      border-radius: 50%;
+      color: white;
+      box-shadow:
+        0 4px 12px rgba(9,32,55,.25),
+        0 0 0 1px rgba(0,0,0,.07);
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .marker:hover,
+    .marker.active {
+      transform: translate(-50%,-50%) scale(1.18);
+      box-shadow:
+        0 7px 18px rgba(9,32,55,.29),
+        0 0 0 4px rgba(255,255,255,.75);
+    }
+
+    .marker[data-category="dining"],
+    .legend-icon.dining {
+      background: var(--dining);
+    }
+
+    .marker[data-category="fitness"],
+    .legend-icon.fitness {
+      background: var(--fitness);
+    }
+
+    .marker[data-category="recreation"],
+    .legend-icon.recreation {
+      background: var(--recreation);
+    }
+
+    .marker[data-category="events"],
+    .legend-icon.events {
+      background: var(--events);
+    }
+
+    .marker[data-category="family"],
+    .legend-icon.family {
+      background: var(--family);
+    }
+
+    .marker[data-category="services"],
+    .legend-icon.services {
+      background: var(--services);
+    }
+
+    .marker-label {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 8px);
+      transform: translateX(-50%) translateY(4px);
+      padding: 6px 8px;
+      border-radius: 5px;
+      background: rgba(8,27,49,.96);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity var(--transition),
+        transform var(--transition);
+    }
+
+    .marker:hover .marker-label {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =========================================================
+       MAP INSTRUCTIONS / ZOOM
+       ========================================================= */
+
+    .map-instructions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      gap: 12px;
+      padding-top: 4px;
+      color: #69737b;
+      font-size: 11px;
+    }
+
+    .instruction-divider {
+      color: #b6b0a9;
+    }
+
+    .zoom-controls {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      z-index: 600;
+      display: flex;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: white;
+      box-shadow: var(--shadow-md);
     }
 
     .zoom-button {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+      width: 46px;
+      height: 45px;
+      border: 0;
       background: white;
-      color: var(--navy);
-      font-size: 18px;
-      font-weight: bold;
+      color: var(--navy-950);
+      font-size: 22px;
+      transition: background var(--transition);
     }
 
-    .zoom-level {
-      min-width: 52px;
+    .zoom-button + .zoom-button {
+      border-left: 1px solid var(--line);
+    }
+
+    .zoom-button:hover {
+      background: #f4f1ec;
+    }
+
+    /* =========================================================
+       FACILITY CARD
+       ========================================================= */
+
+    .facility-panel {
+      overflow: hidden;
+      border: 1px solid #e2ddd5;
+      border-radius: 14px;
+      background: rgba(255,255,255,.97);
+      box-shadow: var(--shadow-md);
+      min-height: 530px;
+      position: sticky;
+      top: calc(var(--header-height) + 24px);
+    }
+
+    .panel-empty {
+      min-height: 530px;
+      display: grid;
+      place-items: center;
+      padding: 34px;
       text-align: center;
+      color: var(--soft-muted);
       font-size: 12px;
-      color: var(--muted);
-    }
-
-    .map-viewport {
-      position: relative;
-      height: 620px;
-      overflow: auto;
-      background:
-        radial-gradient(circle at center, #ffffff 0%, #f8fafc 60%, #f0f3f5 100%);
-    }
-
-    .map-stage {
-      width: 1200px;
-      height: 760px;
-      transform-origin: top left;
-      position: relative;
-      margin: 30px auto;
-      transition: transform 0.15s ease;
-    }
-
-    /*
-      IMPORTANT:
-      The floor-plan image itself is never altered by this page.
-      We simply display your uploaded PNG/JPG here.
-    */
-
-    .floor-plan {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .no-floor-plan {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 40px;
-      color: var(--muted);
-    }
-
-    .no-floor-plan strong {
-      display: block;
-      color: var(--navy);
-      margin-bottom: 8px;
-      font-size: 20px;
-    }
-
-    /* =========================
-       CLICKABLE FACILITY DOTS
-    ========================= */
-
-    .facility-dot {
-      position: absolute;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--blue);
-      border: 4px solid white;
-      box-shadow:
-        0 3px 12px rgba(22, 50, 79, 0.25),
-        0 0 0 2px rgba(79, 143, 190, 0.3);
-      transform: translate(-50%, -50%);
-      z-index: 20;
-      transition: 0.2s ease;
-    }
-
-    .facility-dot:hover {
-      transform: translate(-50%, -50%) scale(1.25);
-    }
-
-    .facility-dot::after {
-      content: attr(data-name);
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 10px);
-      transform: translateX(-50%);
-      background: var(--navy-dark);
-      color: white;
-      padding: 7px 10px;
-      border-radius: 7px;
-      font-size: 12px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.15s ease;
-    }
-
-    .facility-dot:hover::after {
-      opacity: 1;
-    }
-
-    .facility-dot.hidden {
-      display: none;
-    }
-
-    /* =========================
-       FACILITY INFO PANEL
-    ========================= */
-
-    .info-panel {
-      position: fixed;
-      top: 0;
-      right: -430px;
-      width: min(410px, 92vw);
-      height: 100vh;
-      background: white;
-      box-shadow: -20px 0 50px rgba(10, 30, 50, 0.18);
-      z-index: 500;
-      transition: right 0.3s ease;
-      overflow-y: auto;
-    }
-
-    .info-panel.open {
-      right: 0;
-    }
-
-    .info-image {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      background: var(--blue-light);
-    }
-
-    .image-placeholder {
-      width: 100%;
-      height: 240px;
-      background:
-        linear-gradient(135deg, #dbeaf4, #eef5f9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--navy);
-      font-weight: 700;
-    }
-
-    .info-content {
-      padding: 28px;
-    }
-
-    .info-floor {
-      color: var(--blue);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-
-    .info-title {
-      font-size: 28px;
-      color: var(--navy);
-      margin-bottom: 12px;
-    }
-
-    .info-description {
-      color: var(--muted);
-      font-size: 14px;
       line-height: 1.7;
     }
 
-    .close-panel {
-      position: absolute;
-      top: 16px;
-      right: 16px;
+    .facility-photo {
+      height: 210px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, #e9edf0, #dce3e8);
+      color: #75808a;
+      font-size: 12px;
+    }
+
+    .facility-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .facility-panel-body {
+      padding: 22px;
+    }
+
+    .facility-heading-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+
+    .facility-category-icon {
       width: 38px;
       height: 38px;
-      border: none;
-      background: rgba(255,255,255,0.95);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
       border-radius: 50%;
-      font-size: 22px;
-      color: var(--navy);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-      z-index: 20;
+      color: white;
     }
 
-    .overlay {
+    .facility-category-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .facility-category-icon.dining { background: var(--dining); }
+    .facility-category-icon.fitness { background: var(--fitness); }
+    .facility-category-icon.recreation { background: var(--recreation); }
+    .facility-category-icon.events { background: var(--events); }
+    .facility-category-icon.family { background: var(--family); }
+    .facility-category-icon.services { background: var(--services); }
+
+    .facility-name {
+      color: var(--navy-950);
+      font-size: 20px;
+      letter-spacing: .02em;
+    }
+
+    .facility-category-name {
+      margin-bottom: 14px;
+      margin-left: 48px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .facility-description {
+      margin-bottom: 18px;
+      color: #555f68;
+      font-size: 12px;
+      line-height: 1.68;
+    }
+
+    .facility-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      align-items: start;
+      gap: 7px;
+      color: #4f5962;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .meta-row svg {
+      width: 15px;
+      height: 15px;
+      margin-top: 1px;
+      fill: none;
+      stroke: var(--red-700);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .panel-button {
+      width: 100%;
+      padding: 11px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      transition:
+        background var(--transition),
+        color var(--transition);
+    }
+
+    .panel-button + .panel-button {
+      margin-top: 8px;
+    }
+
+    .panel-button.primary {
+      border: 1px solid var(--navy-900);
+      background: var(--navy-900);
+      color: white;
+    }
+
+    .panel-button.primary:hover {
+      background: var(--red-700);
+      border-color: var(--red-700);
+    }
+
+    .panel-button.secondary {
+      border: 1px solid var(--navy-900);
+      background: white;
+      color: var(--navy-900);
+    }
+
+    .panel-button.secondary:hover {
+      background: var(--navy-900);
+      color: white;
+    }
+
+    /* =========================================================
+       CATEGORY DIRECTORY
+       ========================================================= */
+
+    .directory-view {
+      min-height: calc(100vh - var(--header-height));
+      padding: 52px max(36px, 6vw) 72px;
+    }
+
+    .directory-hero {
+      max-width: 1220px;
+      margin: 0 auto 34px;
+    }
+
+    .directory-eyebrow {
+      margin-bottom: 10px;
+      color: var(--red-700);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .directory-title {
+      margin-bottom: 8px;
+      color: var(--navy-950);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 52px;
+      font-weight: 400;
+      letter-spacing: -.03em;
+    }
+
+    .directory-description {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .directory-grid {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 24px;
+    }
+
+    .directory-card {
+      overflow: hidden;
+      border: 1px solid #e1dcd4;
+      border-radius: 11px;
+      background: white;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .directory-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .directory-image {
+      height: 220px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg,#edf0f2,#dfe5e9);
+      color: #78828a;
+      font-size: 12px;
+    }
+
+    .directory-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .directory-card-body {
+      padding: 18px 19px 20px;
+    }
+
+    .directory-category {
+      margin-bottom: 6px;
+      color: var(--red-700);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .directory-facility-name {
+      margin-bottom: 7px;
+      color: var(--navy-950);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 23px;
+      line-height: 1.15;
+    }
+
+    .directory-floor {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .directory-empty {
+      grid-column: 1 / -1;
+      padding: 50px;
+      border: 1px dashed var(--line-dark);
+      border-radius: 10px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* =========================================================
+       MODALS
+       ========================================================= */
+
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 37, 59, 0.30);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 400;
-      transition: opacity 0.3s ease;
+      z-index: 1800;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(8,27,49,.46);
+      backdrop-filter: blur(6px);
     }
 
-    .overlay.visible {
-      opacity: 1;
-      pointer-events: auto;
+    .modal-card {
+      width: min(520px, 100%);
+      padding: 30px;
+      border-radius: 14px;
+      background: white;
+      box-shadow: var(--shadow-lg);
+      position: relative;
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 15px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: #f1eee9;
+      color: var(--navy-950);
+      font-size: 19px;
+    }
+
+    .modal-card h2 {
+      margin-bottom: 12px;
+      color: var(--navy-950);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      font-weight: 400;
+    }
+
+    .modal-card p {
+      color: #59636c;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .modal-card ol {
+      margin: 16px 0 0 20px;
+      color: #59636c;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 17px 32px;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.66);
+      color: #727a81;
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+
+    @media (max-width: 1250px) {
+      .map-layout {
+        grid-template-columns: 110px minmax(380px,1fr);
+      }
+
+      .facility-panel {
+        grid-column: 1 / -1;
+        width: min(620px, 100%);
+        margin: 0 auto;
+        position: static;
+      }
+    }
+
+    @media (max-width: 1050px) {
+      .main-nav {
+        gap: 14px;
+      }
+
+      .nav-link {
+        font-size: 12px;
+      }
+
+      .brand {
+        min-width: 250px;
+      }
+
+      .brand-name {
+        font-size: 17px;
+      }
+    }
 
     @media (max-width: 900px) {
-      header {
+      :root {
+        --header-height: 68px;
+      }
+
+      .site-header {
         padding: 0 18px;
       }
 
-      .app {
+      .main-nav {
+        display: none;
+      }
+
+      .explorer-shell {
         display: block;
       }
 
       .sidebar {
         position: static;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 16px;
+        min-height: auto;
+        max-height: none;
+        padding: 22px 18px 18px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
       }
 
-      .sidebar-title,
-      .legend,
-      .overview-button {
+      .sidebar-title {
+        font-size: 29px;
+      }
+
+      .sidebar-copy,
+      .how-button,
+      .sidebar-label,
+      .building-button {
         display: none;
       }
 
-      .floor-list {
-        flex-direction: row;
+      .floor-selector {
+        display: flex;
+        margin: 0;
         overflow-x: auto;
-        margin-bottom: 0;
       }
 
       .floor-button {
-        width: auto;
-        flex: 0 0 auto;
+        min-width: 68px;
+        border-bottom: 0;
+        border-right: 1px solid #e8e3dc;
       }
 
-      .content {
-        padding: 20px 14px;
+      .explorer-main {
+        padding: 25px 14px;
       }
 
-      .content-top {
+      .explorer-toolbar {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .floor-heading {
+        font-size: 44px;
+      }
+
+      .toolbar-center {
         align-items: stretch;
-        flex-direction: column;
       }
 
-      .floor-heading h2 {
-        font-size: 34px;
-      }
-
-      .search-area {
+      .search-shell {
         width: 100%;
       }
 
+      .filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+      }
+
+      .filter-button {
+        flex: 0 0 auto;
+      }
+
+      .map-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .legend {
+        display: none;
+      }
+
       .map-viewport {
-        height: 560px;
+        height: 580px;
+      }
+
+      .facility-panel {
+        width: 100%;
+      }
+
+      .directory-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .directory-title {
+        font-size: 40px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .brand-name {
+        font-size: 15px;
+      }
+
+      .explorer-main {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .map-viewport {
+        height: 500px;
+      }
+
+      .zoom-controls {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .site-footer {
+        flex-direction: column;
       }
     }
   </style>
@@ -587,724 +1261,1747 @@
 
 <body>
 
-<header>
-  <div class="brand">
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
 
-    <!--
-      LATER:
-      Replace this TAC circle with your real TAC logo image.
-    -->
+  <header class="site-header">
 
-    <div class="logo-placeholder">TAC</div>
+    <button class="brand" id="brandHome" type="button">
 
-    <div class="brand-text">
-      <h1>Explore Tokyo American Club</h1>
-      <p>Facility Directory & Interactive Floor Map</p>
-    </div>
-  </div>
+      <span class="logo-wrap">
+        <!--
+          Upload the real logo later as:
+          tac-logo.png
 
-  <div class="header-right">
-    <button class="header-button" onclick="resetMap()">Reset Map</button>
-  </div>
-</header>
+          If the file is absent, the TAC fallback displays automatically.
+        -->
+        <img
+          id="realLogo"
+          class="real-logo"
+          src="tac-logo.png"
+          alt="Tokyo American Club"
+          onerror="this.classList.add('hidden'); document.getElementById('logoFallback').classList.remove('hidden');"
+        />
 
-<div class="app">
+        <span id="logoFallback" class="logo-fallback hidden">
+          TAC
+        </span>
+      </span>
 
-  <!-- SIDEBAR -->
+      <span class="brand-name">
+        TOKYO AMERICAN CLUB
+      </span>
 
-  <aside class="sidebar">
-
-    <div class="sidebar-title">Explore Floors</div>
-
-    <div class="floor-list">
-      <button class="floor-button" data-floor="B3">B3</button>
-      <button class="floor-button" data-floor="B2">B2</button>
-      <button class="floor-button" data-floor="B1">B1</button>
-      <button class="floor-button" data-floor="1F">1F</button>
-      <button class="floor-button active" data-floor="2F">2F</button>
-      <button class="floor-button" data-floor="3F">3F</button>
-      <button class="floor-button" data-floor="4F">4F</button>
-      <button class="floor-button" data-floor="5F">5F</button>
-    </div>
-
-    <button class="overview-button">
-      Building Overview
     </button>
 
-    <div class="sidebar-title">Map Key</div>
+    <nav class="main-nav" aria-label="Facility categories">
 
-    <div class="legend">
-      <div class="legend-item">
-        <span class="legend-dot"></span>
-        Clickable facility
-      </div>
+      <button class="nav-link" data-directory="dining">
+        Dining
+      </button>
 
-      <div class="legend-item">
-        Click a blue marker to learn more.
-      </div>
-    </div>
+      <button class="nav-link" data-directory="fitness">
+        Fitness
+      </button>
 
-  </aside>
+      <button class="nav-link" data-directory="recreation">
+        Recreation
+      </button>
 
-  <!-- MAIN CONTENT -->
+      <button class="nav-link" data-directory="events">
+        Events
+      </button>
 
-  <main class="content">
+      <button class="nav-link" data-directory="family">
+        Family
+      </button>
 
-    <div class="content-top">
+      <button class="nav-link" data-directory="services">
+        Services
+      </button>
 
-      <div class="floor-heading">
-        <p>Tokyo American Club</p>
-        <h2 id="floorTitle">2F</h2>
-      </div>
+      <button class="nav-link active" id="exploreNav">
+        Explore the Club
+      </button>
 
-      <div class="search-area">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search facilities..."
-        />
-      </div>
+    </nav>
 
-    </div>
+  </header>
 
-    <div class="filters">
-      <button class="filter-button active" data-category="all">All</button>
-      <button class="filter-button" data-category="dining">Dining</button>
-      <button class="filter-button" data-category="fitness">Fitness</button>
-      <button class="filter-button" data-category="family">Family</button>
-      <button class="filter-button" data-category="events">Events</button>
-      <button class="filter-button" data-category="services">Services</button>
-    </div>
+  <!-- =======================================================
+       EXPLORER
+       ======================================================= -->
 
-    <section class="map-card">
+  <section id="explorerView">
 
-      <div class="map-toolbar">
+    <div class="explorer-shell">
 
-        <div class="map-toolbar-left">
-          Click a marker to explore a facility.
+      <!-- SIDEBAR -->
+
+      <aside class="sidebar">
+
+        <div class="eyebrow">
+          Explore the Club
         </div>
 
-        <div class="zoom-controls">
-          <button class="zoom-button" onclick="zoomOut()">−</button>
-          <span class="zoom-level" id="zoomLevel">100%</span>
-          <button class="zoom-button" onclick="zoomIn()">+</button>
+        <h1 class="sidebar-title">
+          Find Your<br />
+          Experience
+        </h1>
+
+        <p class="sidebar-copy">
+          Discover dining, fitness, recreation, events and more
+          across the floors of Tokyo American Club.
+        </p>
+
+        <button class="how-button" id="howButton">
+          HOW TO USE &nbsp; ⓘ
+        </button>
+
+        <div class="sidebar-label">
+          Floor Selector
         </div>
 
-      </div>
+        <div class="floor-selector">
 
-      <div class="map-viewport" id="mapViewport">
+          <button class="floor-button" data-floor="5F">5F</button>
+          <button class="floor-button" data-floor="4F">4F</button>
+          <button class="floor-button" data-floor="3F">3F</button>
+          <button class="floor-button active" data-floor="2F">2F</button>
+          <button class="floor-button" data-floor="1F">1F</button>
+          <button class="floor-button" data-floor="B1">B1F</button>
+          <button class="floor-button" data-floor="B2">B2F</button>
+          <button class="floor-button" data-floor="B3">B3F</button>
 
-        <div class="map-stage" id="mapStage">
+        </div>
 
-          <!--
-            THE FLOOR PLAN IMAGE APPEARS HERE.
-            Do not place facility dots inside the image itself.
-            They are generated separately with JavaScript.
-          -->
+        <button class="building-button" id="buildingButton">
+          BUILDING OVERVIEW
+        </button>
 
-          <img
-            id="floorPlanImage"
-            class="floor-plan"
-            alt="Tokyo American Club floor plan"
-          />
+      </aside>
 
-          <div class="no-floor-plan" id="noFloorPlan">
-            <strong>Floor plan goes here</strong>
-            <span>
-              Once you upload your TAC floor-plan images,
-              this area will display the exact image you provide.
-            </span>
+      <!-- MAIN -->
+
+      <main class="explorer-main">
+
+        <div class="explorer-toolbar">
+
+          <div class="floor-heading" id="floorTitle">
+            2F
+          </div>
+
+          <div class="toolbar-center">
+
+            <div class="search-shell">
+
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search the Club..."
+                autocomplete="off"
+                aria-label="Search facilities"
+              />
+
+              <svg class="search-icon" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="M20 20l-4-4"></path>
+              </svg>
+
+              <div
+                class="search-results hidden"
+                id="searchResults">
+              </div>
+
+            </div>
+
+            <div class="filters">
+
+              <button class="filter-button active" data-category="all">
+                All
+              </button>
+
+              <button class="filter-button" data-category="dining">
+                Dining
+              </button>
+
+              <button class="filter-button" data-category="fitness">
+                Fitness
+              </button>
+
+              <button class="filter-button" data-category="recreation">
+                Recreation
+              </button>
+
+              <button class="filter-button" data-category="events">
+                Events
+              </button>
+
+              <button class="filter-button" data-category="family">
+                Family
+              </button>
+
+              <button class="filter-button" data-category="services">
+                Services
+              </button>
+
+            </div>
+
           </div>
 
         </div>
 
+        <div class="map-layout">
+
+          <!-- LEGEND -->
+
+          <div class="legend">
+
+            <div class="legend-row">
+              <span class="legend-icon dining" data-icon="dining"></span>
+              Dining
+            </div>
+
+            <div class="legend-row">
+              <span class="legend-icon fitness" data-icon="fitness"></span>
+              Fitness
+            </div>
+
+            <div class="legend-row">
+              <span class="legend-icon recreation" data-icon="recreation"></span>
+              Recreation
+            </div>
+
+            <div class="legend-row">
+              <span class="legend-icon events" data-icon="events"></span>
+              Events
+            </div>
+
+            <div class="legend-row">
+              <span class="legend-icon family" data-icon="family"></span>
+              Family
+            </div>
+
+            <div class="legend-row">
+              <span class="legend-icon services" data-icon="services"></span>
+              Services
+            </div>
+
+          </div>
+
+          <!-- MAP -->
+
+          <div class="map-frame">
+
+            <div class="map-viewport" id="mapViewport">
+
+              <div class="map-stage-wrapper">
+
+                <div class="map-stage" id="mapStage">
+
+                  <div class="map-loading" id="mapLoading">
+                    Loading floor plan...
+                  </div>
+
+                  <img
+                    id="floorPlanImage"
+                    class="floor-plan hidden"
+                    alt="Tokyo American Club floor plan"
+                    draggable="false"
+                  />
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="map-instructions">
+
+              <span>Drag to pan</span>
+              <span class="instruction-divider">|</span>
+
+              <span>Scroll to zoom</span>
+              <span class="instruction-divider">|</span>
+
+              <span>Click an area to explore</span>
+
+            </div>
+
+          </div>
+
+          <!-- FACILITY PANEL -->
+
+          <aside class="facility-panel" id="facilityPanel">
+
+            <div class="panel-empty" id="panelEmpty">
+
+              <div>
+                <strong style="display:block;color:#173a60;margin-bottom:7px;font-size:13px;">
+                  Explore a facility
+                </strong>
+
+                Select a colored marker on the floor plan
+                to view facility information.
+              </div>
+
+            </div>
+
+            <div class="hidden" id="panelContent">
+
+              <div class="facility-photo" id="facilityPhoto">
+                Facility Photo
+              </div>
+
+              <div class="facility-panel-body">
+
+                <div class="facility-heading-row">
+
+                  <span
+                    class="facility-category-icon"
+                    id="facilityCategoryIcon">
+                  </span>
+
+                  <h2 class="facility-name" id="facilityName">
+                  </h2>
+
+                </div>
+
+                <div
+                  class="facility-category-name"
+                  id="facilityCategoryName">
+                </div>
+
+                <p
+                  class="facility-description"
+                  id="facilityDescription">
+                </p>
+
+                <div class="facility-meta">
+
+                  <div class="meta-row">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12z"></path>
+                      <circle cx="12" cy="9" r="2"></circle>
+                    </svg>
+                    <span id="facilityFloor"></span>
+                  </div>
+
+                  <div class="meta-row">
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <path d="M12 7v5l3 2"></path>
+                    </svg>
+                    <span id="facilityHours"></span>
+                  </div>
+
+                  <div class="meta-row">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M6 3h4l2 5-3 2c1 3 3 5 6 6l2-3 5 2v4c0 1-1 2-2 2C10 20 4 14 3 5c0-1 1-2 3-2z"></path>
+                    </svg>
+                    <span id="facilityPhone"></span>
+                  </div>
+
+                  <div class="meta-row">
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="8" cy="8" r="3"></circle>
+                      <circle cx="16" cy="9" r="2"></circle>
+                      <path d="M3 20c0-4 2-7 5-7s5 3 5 7"></path>
+                      <path d="M13 20c0-3 1-5 4-5 2 0 4 2 4 5"></path>
+                    </svg>
+                    <span id="facilityAccess"></span>
+                  </div>
+
+                </div>
+
+                <button class="panel-button primary" id="viewDetailsButton">
+                  VIEW DETAILS
+                </button>
+
+                <button class="panel-button secondary" id="viewPhotosButton">
+                  VIEW PHOTOS
+                </button>
+
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       DIRECTORY VIEW
+       ======================================================= -->
+
+  <section class="directory-view hidden" id="directoryView">
+
+    <div class="directory-hero">
+
+      <div class="directory-eyebrow">
+        Tokyo American Club
       </div>
 
-    </section>
+      <h1 class="directory-title" id="directoryTitle">
+        Dining
+      </h1>
 
-  </main>
-</div>
+      <p class="directory-description" id="directoryDescription">
+      </p>
 
-<!-- DARK BACKGROUND WHEN INFO PANEL OPENS -->
-
-<div
-  class="overlay"
-  id="overlay"
-  onclick="closeFacility()"
-></div>
-
-<!-- FACILITY PANEL -->
-
-<aside class="info-panel" id="infoPanel">
-
-  <button
-    class="close-panel"
-    onclick="closeFacility()"
-  >
-    ×
-  </button>
-
-  <div id="facilityImageContainer">
-    <div class="image-placeholder">
-      Facility Photo
     </div>
+
+    <div class="directory-grid" id="directoryGrid">
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       ZOOM CONTROLS
+       ======================================================= -->
+
+  <div class="zoom-controls">
+
+    <button
+      class="zoom-button"
+      id="zoomOutButton"
+      aria-label="Zoom out">
+      −
+    </button>
+
+    <button
+      class="zoom-button"
+      id="zoomInButton"
+      aria-label="Zoom in">
+      +
+    </button>
+
   </div>
 
-  <div class="info-content">
-    <div class="info-floor" id="facilityFloor"></div>
-    <h3 class="info-title" id="facilityName"></h3>
-    <p class="info-description" id="facilityDescription"></p>
+  <!-- =======================================================
+       HOW TO USE MODAL
+       ======================================================= -->
+
+  <div class="modal-backdrop hidden" id="howModal">
+
+    <div class="modal-card">
+
+      <button class="modal-close" data-close-modal>
+        ×
+      </button>
+
+      <h2>
+        Explore the Club
+      </h2>
+
+      <p>
+        Use the interactive floor plans to explore member-facing
+        facilities throughout Tokyo American Club.
+      </p>
+
+      <ol>
+        <li>Select a floor from the Floor Selector.</li>
+        <li>Use category filters or search for a facility.</li>
+        <li>Click a colored marker to open facility information.</li>
+        <li>Drag the map to pan and use the zoom controls as needed.</li>
+        <li>Select a category in the top navigation to browse all facilities in that category.</li>
+      </ol>
+
+    </div>
+
   </div>
 
-</aside>
+  <!-- =======================================================
+       BUILDING OVERVIEW MODAL
+       ======================================================= -->
 
-<script>
+  <div class="modal-backdrop hidden" id="buildingModal">
 
-  /*
-  ========================================================
-  FLOOR PLAN FILES
-  ========================================================
+    <div class="modal-card">
 
-  Later, when you upload your floor-plan images to GitHub,
-  change these filenames to match your files.
+      <button class="modal-close" data-close-modal>
+        ×
+      </button>
 
-  Example:
+      <h2>
+        Building Overview
+      </h2>
 
-  "2F": "images/2F.png"
+      <p>
+        Select any floor below to open its interactive map.
+      </p>
 
-  Your image itself will NOT be changed.
-  */
+      <div
+        style="
+          display:grid;
+          grid-template-columns:repeat(4,1fr);
+          gap:9px;
+          margin-top:20px;
+        "
+        id="buildingOverviewButtons">
+      </div>
 
-const floorPlans = {
+    </div>
 
-  "B3": "floor B3.png",
-  "B2": "floor B2.png",
-  "B1": "floor B1.png",
-  "1F": "floor 1.png",
-  "2F": "floor 2.png",
-  "3F": "floor 3.png",
-  "4F": "floor 4.png",
-  "5F": "floor 5.png"
+  </div>
 
-};
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
 
+  <footer class="site-footer">
 
-  /*
-  ========================================================
-  FACILITIES
-  ========================================================
+    <span>
+      Tokyo American Club
+    </span>
 
-  Each facility uses percentages for its dot position.
+    <span>
+      Interactive Facility Explorer
+    </span>
 
-  x = distance from LEFT of floor plan
-  y = distance from TOP of floor plan
+  </footer>
 
-  This makes the dots stay attached to the same location
-  even when the map is resized.
+  <script>
+    /* =========================================================
+       FLOOR PLAN FILES
 
-  We will set the exact coordinates after your actual
-  floor plans are uploaded.
+       These match the image filenames already uploaded
+       to your GitHub repository.
+       ========================================================= */
 
-  These entries are EXAMPLES only.
-  */
-  const facilities = [
-    
-  {
-  name: "The Studio",
-  floor: "2F",
-  category: "fitness",
-  x: 26,
-  y: 12,
-  description: "Facility information will be added here.",
-  image: ""
-},
+    const FLOOR_PLANS = {
+      "B3": "floor B3.png",
+      "B2": "floor B2.png",
+      "B1": "floor B1.png",
+      "1F": "floor 1.png",
+      "2F": "floor 2.png",
+      "3F": "floor 3.png",
+      "4F": "floor 4.png",
+      "5F": "floor 5.png"
+    };
 
-{
-  name: "Functional Fitness Room",
-  floor: "2F",
-  category: "fitness",
-  x: 47,
-  y: 9,
-  description: "Facility information will be added here.",
-  image: ""
-},
+    /* =========================================================
+       FACILITY DATABASE
 
-{
-  name: "Music Studios",
-  floor: "2F",
-  category: "family",
-  x: 52,
-  y: 9,
-  description: "Facility information will be added here.",
-  image: ""
-},
+       IMPORTANT:
+       To add a real facility image later, change:
 
-{
-  name: "19th Hole",
-  floor: "2F",
-  category: "fitness",
-  x: 58,
-  y: 9,
-  description: "Facility information will be added here.",
-  image: ""
-},
+       image: ""
 
-{
-  name: "Family Changing Rooms",
-  floor: "2F",
-  category: "family",
-  x: 32,
-  y: 34,
-  description: "Facility information will be added here.",
-  image: ""
-},
+       to:
 
-{
-  name: "Gymnasium",
-  floor: "2F",
-  category: "fitness",
-  x: 50,
-  y: 34,
-  description: "Facility information will be added here.",
-  image: ""
-},
+       image: "my-photo.jpg"
 
-{
-  name: "Squash Courts",
-  floor: "2F",
-  category: "fitness",
-  x: 63,
-  y: 34,
-  description: "Facility information will be added here.",
-  image: ""
-},
+       The same image will automatically appear in:
+       - the map facility panel
+       - the category directory
+       ========================================================= */
 
-{
-  name: "'O' Zone",
-  floor: "2F",
-  category: "fitness",
-  x: 77,
-  y: 34,
-  description: "Facility information will be added here.",
-  image: ""
-},
+    const FACILITIES = [
 
-{
-  name: "Washington Room",
-  floor: "2F",
-  category: "events",
-  x: 2,
-  y: 68,
-  description: "Facility information will be added here.",
-  image: ""
-},
+      /* =======================================================
+         2F
+         ======================================================= */
 
-{
-  name: "Business Meeting Center",
-  floor: "2F",
-  category: "events",
-  x: 33,
-  y: 68,
-  description: "Facility information will be added here.",
-  image: ""
-},
+      {
+        id: "2f-studio",
+        name: "The Studio",
+        floor: "2F",
+        category: "fitness",
+        x: 18,
+        y: 8,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-{
-  name: "Children's Library",
-  floor: "2F",
-  category: "family",
-  x: 47,
-  y: 72,
-  description: "Facility information will be added here.",
-  image: ""
-},
+      {
+        id: "2f-teen-lounge",
+        name: "Pre-Teen & Teen Lounge",
+        floor: "2F",
+        category: "family",
+        x: 49,
+        y: 7,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-{
-  name: "Lincoln Room",
-  floor: "2F",
-  category: "events",
-  x: 2,
-  y: 81,
-  description: "Facility information will be added here.",
-  image: ""
-},
+      {
+        id: "2f-music-studios",
+        name: "Music Studios",
+        floor: "2F",
+        category: "recreation",
+        x: 62,
+        y: 7,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-{
-  name: "Hal Roberts Library",
-  floor: "2F",
-  category: "family",
-  x: 48,
-  y: 81,
-  description: "Facility information will be added here.",
-  image: ""
-},
+      {
+        id: "2f-19th-hole",
+        name: "19th Hole",
+        floor: "2F",
+        category: "dining",
+        x: 68,
+        y: 8,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-{
-  name: "William Logan Jr. Room",
-  floor: "2F",
-  category: "events",
-  x: 2,
-  y: 91,
-  description: "Facility information will be added here.",
-  image: ""
-},
+      {
+        id: "2f-family-changing",
+        name: "Family Changing Rooms",
+        floor: "2F",
+        category: "family",
+        x: 15,
+        y: 27,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-];
-  /*
-  ========================================================
-  APPLICATION
-  ========================================================
-  */
+      {
+        id: "2f-gymnasium",
+        name: "Gymnasium",
+        floor: "2F",
+        category: "fitness",
+        x: 58,
+        y: 28,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  let currentFloor = "2F";
-  let currentCategory = "all";
-  let currentZoom = 1;
+      {
+        id: "2f-squash",
+        name: "Squash Courts",
+        floor: "2F",
+        category: "fitness",
+        x: 78,
+        y: 27,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  const floorTitle =
-    document.getElementById("floorTitle");
+      {
+        id: "2f-d-zone",
+        name: "'D' Zone",
+        floor: "2F",
+        category: "family",
+        x: 89,
+        y: 27,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  const mapStage =
-    document.getElementById("mapStage");
+      {
+        id: "2f-washington",
+        name: "Washington Room",
+        floor: "2F",
+        category: "events",
+        x: 12,
+        y: 70,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  const floorPlanImage =
-    document.getElementById("floorPlanImage");
+      {
+        id: "2f-business",
+        name: "Business Meeting Center",
+        floor: "2F",
+        category: "events",
+        x: 25,
+        y: 70,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  const noFloorPlan =
-    document.getElementById("noFloorPlan");
+      {
+        id: "2f-childrens-library",
+        name: "Children's Library",
+        floor: "2F",
+        category: "family",
+        x: 50,
+        y: 71,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  const zoomLevel =
-    document.getElementById("zoomLevel");
+      {
+        id: "2f-lincoln",
+        name: "Lincoln Room",
+        floor: "2F",
+        category: "events",
+        x: 12,
+        y: 81,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  const searchInput =
-    document.getElementById("searchInput");
+      {
+        id: "2f-hal-roberts",
+        name: "Hal Roberts Library",
+        floor: "2F",
+        category: "family",
+        x: 50,
+        y: 86,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
+      {
+        id: "2f-william-logan",
+        name: "William Logan Jr. Room",
+        floor: "2F",
+        category: "events",
+        x: 12,
+        y: 92,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-  /*
-  ========================================================
-  LOAD FLOOR
-  ========================================================
-  */
+      /* =======================================================
+         3F
+         ======================================================= */
 
-  function loadFloor(floor) {
+      {
+        id: "3f-fitness-center",
+        name: "Fitness Center",
+        floor: "3F",
+        category: "fitness",
+        x: 47,
+        y: 14,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      },
 
-    currentFloor = floor;
+      {
+        id: "3f-prime-51",
+        name: "Prime 51",
+        floor: "3F",
+        category: "dining",
+        x: 45,
+        y: 78,
+        description: "Facility information will be added here.",
+        image: "",
+        hours: "Hours to be added",
+        phone: "Contact information to be added",
+        access: "Access information to be added"
+      }
 
-    floorTitle.textContent = floor;
+    ];
 
-    const file = floorPlans[floor];
+    /* =========================================================
+       CATEGORY CONFIGURATION
+       ========================================================= */
 
-    if (file) {
+    const CATEGORY_INFO = {
+      dining: {
+        label: "Dining",
+        description:
+          "Explore dining venues throughout Tokyo American Club."
+      },
 
-      floorPlanImage.src = file;
-      floorPlanImage.style.display = "block";
-      noFloorPlan.style.display = "none";
+      fitness: {
+        label: "Fitness",
+        description:
+          "Explore fitness facilities and spaces throughout Tokyo American Club."
+      },
 
-    } else {
+      recreation: {
+        label: "Recreation",
+        description:
+          "Explore recreation facilities and activity spaces throughout Tokyo American Club."
+      },
 
-      floorPlanImage.removeAttribute("src");
-      floorPlanImage.style.display = "none";
-      noFloorPlan.style.display = "flex";
+      events: {
+        label: "Events",
+        description:
+          "Explore meeting rooms, event spaces and gathering venues throughout Tokyo American Club."
+      },
 
+      family: {
+        label: "Family",
+        description:
+          "Explore family-focused facilities and spaces throughout Tokyo American Club."
+      },
+
+      services: {
+        label: "Services",
+        description:
+          "Explore Club services and supporting facilities throughout Tokyo American Club."
+      }
+    };
+
+    /* =========================================================
+       ICONS
+       ========================================================= */
+
+    function iconSVG(category) {
+      const icons = {
+        dining: `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 3v8"></path>
+            <path d="M3 3v5"></path>
+            <path d="M9 3v5"></path>
+            <path d="M3 8h6"></path>
+            <path d="M6 11v10"></path>
+            <path d="M16 3v18"></path>
+            <path d="M16 3c4 3 4 7 0 10"></path>
+          </svg>
+        `,
+
+        fitness: `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 8v8"></path>
+            <path d="M19 8v8"></path>
+            <path d="M2 10v4"></path>
+            <path d="M22 10v4"></path>
+            <path d="M5 12h14"></path>
+          </svg>
+        `,
+
+        recreation: `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8"></circle>
+            <path d="M8 8l8 8"></path>
+            <path d="M16 8l-8 8"></path>
+          </svg>
+        `,
+
+        events: `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+            <path d="M8 3v4"></path>
+            <path d="M16 3v4"></path>
+            <path d="M4 10h16"></path>
+          </svg>
+        `,
+
+        family: `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="8" cy="8" r="3"></circle>
+            <circle cx="16" cy="9" r="2.5"></circle>
+            <path d="M3 20c0-4 2-7 5-7s5 3 5 7"></path>
+            <path d="M13 20c0-3 1-6 4-6 2 0 4 2 4 6"></path>
+          </svg>
+        `,
+
+        services: `
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 2v4"></path>
+            <path d="M12 18v4"></path>
+            <path d="M2 12h4"></path>
+            <path d="M18 12h4"></path>
+            <path d="M5 5l3 3"></path>
+            <path d="M16 16l3 3"></path>
+            <path d="M19 5l-3 3"></path>
+            <path d="M8 16l-3 3"></path>
+          </svg>
+        `
+      };
+
+      return icons[category] || icons.services;
     }
 
-    renderFacilityDots();
+    /* =========================================================
+       STATE
+       ========================================================= */
 
-  }
+    const state = {
+      floor: "2F",
+      category: "all",
+      zoom: 1,
+      selectedFacilityId: null,
+      isDragging: false,
+      dragStartX: 0,
+      dragStartY: 0,
+      scrollStartLeft: 0,
+      scrollStartTop: 0
+    };
 
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
 
-  /*
-  ========================================================
-  DRAW FACILITY DOTS
-  ========================================================
-  */
+    const explorerView = document.getElementById("explorerView");
+    const directoryView = document.getElementById("directoryView");
 
-  function renderFacilityDots() {
+    const floorTitle = document.getElementById("floorTitle");
+    const floorPlanImage = document.getElementById("floorPlanImage");
+    const mapLoading = document.getElementById("mapLoading");
 
-    document
-      .querySelectorAll(".facility-dot")
-      .forEach(dot => dot.remove());
+    const mapViewport = document.getElementById("mapViewport");
+    const mapStage = document.getElementById("mapStage");
 
-    const search =
-      searchInput.value.toLowerCase().trim();
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
 
-    facilities
-      .filter(facility =>
-        facility.floor === currentFloor
-      )
-      .filter(facility =>
-        currentCategory === "all" ||
-        facility.category === currentCategory
-      )
-      .filter(facility =>
-        facility.name.toLowerCase().includes(search)
-      )
-      .forEach(facility => {
+    const panelEmpty = document.getElementById("panelEmpty");
+    const panelContent = document.getElementById("panelContent");
 
-        const dot =
-          document.createElement("button");
+    const facilityPhoto = document.getElementById("facilityPhoto");
+    const facilityName = document.getElementById("facilityName");
+    const facilityCategoryName = document.getElementById("facilityCategoryName");
+    const facilityCategoryIcon = document.getElementById("facilityCategoryIcon");
+    const facilityDescription = document.getElementById("facilityDescription");
+    const facilityFloor = document.getElementById("facilityFloor");
+    const facilityHours = document.getElementById("facilityHours");
+    const facilityPhone = document.getElementById("facilityPhone");
+    const facilityAccess = document.getElementById("facilityAccess");
 
-        dot.className = "facility-dot";
+    /* =========================================================
+       INITIALIZE LEGEND ICONS
+       ========================================================= */
 
-        dot.style.left = facility.x + "%";
-        dot.style.top = facility.y + "%";
+    document.querySelectorAll("[data-icon]").forEach(element => {
+      element.innerHTML = iconSVG(element.dataset.icon);
+    });
 
-        dot.setAttribute(
-          "data-name",
-          facility.name
+    /* =========================================================
+       FLOOR LOADING
+       ========================================================= */
+
+    function loadFloor(floor, options = {}) {
+      state.floor = floor;
+      floorTitle.textContent = floor;
+
+      document.querySelectorAll(".floor-button").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.floor === floor
         );
-
-        dot.setAttribute(
-          "aria-label",
-          facility.name
-        );
-
-        dot.onclick = () =>
-          openFacility(facility);
-
-        mapStage.appendChild(dot);
-
       });
 
-  }
+      panelEmpty.classList.remove("hidden");
+      panelContent.classList.add("hidden");
+      state.selectedFacilityId = null;
 
+      mapLoading.classList.remove("hidden");
+      floorPlanImage.classList.add("hidden");
 
-  /*
-  ========================================================
-  FACILITY PANEL
-  ========================================================
-  */
+      floorPlanImage.onload = () => {
+        mapLoading.classList.add("hidden");
+        floorPlanImage.classList.remove("hidden");
 
-  function openFacility(facility) {
+        renderMarkers();
 
-    document
-      .getElementById("facilityFloor")
-      .textContent = facility.floor;
+        if (!options.keepZoom) {
+          resetZoom();
+        }
+      };
 
-    document
-      .getElementById("facilityName")
-      .textContent = facility.name;
+      floorPlanImage.onerror = () => {
+        mapLoading.textContent =
+          `Unable to load ${FLOOR_PLANS[floor]}. Check the filename in GitHub.`;
+      };
 
-    document
-      .getElementById("facilityDescription")
-      .textContent = facility.description;
-
-    const imageContainer =
-      document.getElementById(
-        "facilityImageContainer"
-      );
-
-    if (facility.image) {
-
-      imageContainer.innerHTML = `
-        <img
-          src="${facility.image}"
-          class="info-image"
-          alt="${facility.name}"
-        >
-      `;
-
-    } else {
-
-      imageContainer.innerHTML = `
-        <div class="image-placeholder">
-          Facility Photo
-        </div>
-      `;
-
+      floorPlanImage.src = FLOOR_PLANS[floor];
     }
 
-    document
-      .getElementById("infoPanel")
-      .classList.add("open");
+    /* =========================================================
+       FACILITY FILTERING
+       ========================================================= */
 
-    document
-      .getElementById("overlay")
-      .classList.add("visible");
+    function getVisibleFacilities() {
+      const query = searchInput.value.trim().toLowerCase();
 
-  }
+      return FACILITIES.filter(facility => {
+        const floorMatch =
+          facility.floor === state.floor;
 
+        const categoryMatch =
+          state.category === "all" ||
+          facility.category === state.category;
 
-  function closeFacility() {
+        const searchMatch =
+          !query ||
+          facility.name.toLowerCase().includes(query);
 
-    document
-      .getElementById("infoPanel")
-      .classList.remove("open");
+        return floorMatch && categoryMatch && searchMatch;
+      });
+    }
 
-    document
-      .getElementById("overlay")
-      .classList.remove("visible");
+    /* =========================================================
+       MARKERS
+       ========================================================= */
 
-  }
+    function renderMarkers() {
+      mapStage
+        .querySelectorAll(".marker")
+        .forEach(marker => marker.remove());
 
+      getVisibleFacilities().forEach(facility => {
+        const marker = document.createElement("button");
 
-  /*
-  ========================================================
-  FLOOR BUTTONS
-  ========================================================
-  */
+        marker.className = "marker";
+        marker.type = "button";
 
-  document
-    .querySelectorAll(".floor-button")
-    .forEach(button => {
+        marker.dataset.category = facility.category;
+        marker.dataset.facilityId = facility.id;
 
-      button.addEventListener(
-        "click",
-        function () {
+        marker.style.left = `${facility.x}%`;
+        marker.style.top = `${facility.y}%`;
 
-          document
-            .querySelectorAll(".floor-button")
-            .forEach(btn =>
-              btn.classList.remove("active")
-            );
+        marker.innerHTML = `
+          ${iconSVG(facility.category)}
+          <span class="marker-label">
+            ${escapeHTML(facility.name)}
+          </span>
+        `;
 
-          this.classList.add("active");
+        marker.setAttribute(
+          "aria-label",
+          `Open ${facility.name}`
+        );
 
-          loadFloor(
-            this.dataset.floor
+        marker.addEventListener("click", event => {
+          event.stopPropagation();
+          openFacility(facility.id);
+        });
+
+        mapStage.appendChild(marker);
+      });
+
+      updateActiveMarker();
+    }
+
+    function updateActiveMarker() {
+      document.querySelectorAll(".marker").forEach(marker => {
+        marker.classList.toggle(
+          "active",
+          marker.dataset.facilityId === state.selectedFacilityId
+        );
+      });
+    }
+
+    /* =========================================================
+       FACILITY PANEL
+       ========================================================= */
+
+    function openFacility(facilityId) {
+      const facility =
+        FACILITIES.find(item => item.id === facilityId);
+
+      if (!facility) return;
+
+      state.selectedFacilityId = facility.id;
+
+      panelEmpty.classList.add("hidden");
+      panelContent.classList.remove("hidden");
+
+      facilityName.textContent = facility.name;
+      facilityCategoryName.textContent =
+        CATEGORY_INFO[facility.category]?.label || facility.category;
+
+      facilityCategoryIcon.className =
+        `facility-category-icon ${facility.category}`;
+
+      facilityCategoryIcon.innerHTML =
+        iconSVG(facility.category);
+
+      facilityDescription.textContent =
+        facility.description || "Facility information will be added here.";
+
+      facilityFloor.textContent =
+        `${facility.floor} Floor`;
+
+      facilityHours.textContent =
+        facility.hours || "Hours to be added";
+
+      facilityPhone.textContent =
+        facility.phone || "Contact information to be added";
+
+      facilityAccess.textContent =
+        facility.access || "Access information to be added";
+
+      if (facility.image) {
+        facilityPhoto.innerHTML = `
+          <img
+            src="${escapeAttribute(facility.image)}"
+            alt="${escapeAttribute(facility.name)}"
+          />
+        `;
+      } else {
+        facilityPhoto.textContent = "Facility Photo";
+      }
+
+      updateActiveMarker();
+    }
+
+    /* =========================================================
+       FLOOR SELECTOR
+       ========================================================= */
+
+    document.querySelectorAll(".floor-button").forEach(button => {
+      button.addEventListener("click", () => {
+        loadFloor(button.dataset.floor);
+      });
+    });
+
+    /* =========================================================
+       CATEGORY FILTERS
+       ========================================================= */
+
+    document.querySelectorAll(".filter-button").forEach(button => {
+      button.addEventListener("click", () => {
+        state.category = button.dataset.category;
+
+        document.querySelectorAll(".filter-button").forEach(item => {
+          item.classList.toggle(
+            "active",
+            item === button
           );
+        });
 
-        }
-      );
-
+        renderMarkers();
+      });
     });
 
+    /* =========================================================
+       GLOBAL SEARCH
+       ========================================================= */
 
-  /*
-  ========================================================
-  CATEGORY FILTERS
-  ========================================================
-  */
+    searchInput.addEventListener("input", () => {
+      renderMarkers();
+      renderSearchResults();
+    });
 
-  document
-    .querySelectorAll(".filter-button")
-    .forEach(button => {
+    searchInput.addEventListener("focus", () => {
+      renderSearchResults();
+    });
 
-      button.addEventListener(
-        "click",
-        function () {
+    document.addEventListener("click", event => {
+      if (!event.target.closest(".search-shell")) {
+        searchResults.classList.add("hidden");
+      }
+    });
 
-          document
-            .querySelectorAll(".filter-button")
-            .forEach(btn =>
-              btn.classList.remove("active")
+    function renderSearchResults() {
+      const query =
+        searchInput.value.trim().toLowerCase();
+
+      if (!query) {
+        searchResults.classList.add("hidden");
+        searchResults.innerHTML = "";
+        return;
+      }
+
+      const results =
+        FACILITIES
+          .filter(facility =>
+            facility.name.toLowerCase().includes(query)
+          )
+          .slice(0, 8);
+
+      if (!results.length) {
+        searchResults.innerHTML = `
+          <div style="padding:14px;color:#78818a;font-size:12px;">
+            No matching facilities found.
+          </div>
+        `;
+
+        searchResults.classList.remove("hidden");
+        return;
+      }
+
+      searchResults.innerHTML =
+        results
+          .map(facility => `
+            <button
+              class="search-result"
+              type="button"
+              data-search-facility="${facility.id}"
+            >
+
+              <span
+                class="facility-category-icon ${facility.category}"
+                style="width:30px;height:30px;"
+              >
+                ${iconSVG(facility.category)}
+              </span>
+
+              <span>
+                <span class="search-result-name">
+                  ${escapeHTML(facility.name)}
+                </span>
+              </span>
+
+              <span class="search-result-floor">
+                ${facility.floor}
+              </span>
+
+            </button>
+          `)
+          .join("");
+
+      searchResults.classList.remove("hidden");
+
+      searchResults
+        .querySelectorAll("[data-search-facility]")
+        .forEach(button => {
+          button.addEventListener("click", () => {
+            const facility =
+              FACILITIES.find(
+                item =>
+                  item.id === button.dataset.searchFacility
+              );
+
+            if (!facility) return;
+
+            showExplorer();
+
+            searchInput.value = "";
+
+            state.category = "all";
+
+            document.querySelectorAll(".filter-button").forEach(filter => {
+              filter.classList.toggle(
+                "active",
+                filter.dataset.category === "all"
+              );
+            });
+
+            loadFloor(facility.floor);
+
+            floorPlanImage.addEventListener(
+              "load",
+              () => {
+                openFacility(facility.id);
+              },
+              { once: true }
             );
 
-          this.classList.add("active");
+            searchResults.classList.add("hidden");
+          });
+        });
+    }
 
-          currentCategory =
-            this.dataset.category;
+    /* =========================================================
+       TOP CATEGORY NAVIGATION
+       ========================================================= */
 
-          renderFacilityDots();
-
-        }
-      );
-
+    document.querySelectorAll("[data-directory]").forEach(button => {
+      button.addEventListener("click", () => {
+        openDirectory(button.dataset.directory);
+      });
     });
 
-
-  /*
-  ========================================================
-  SEARCH
-  ========================================================
-  */
-
-  searchInput.addEventListener(
-    "input",
-    renderFacilityDots
-  );
-
-
-  /*
-  ========================================================
-  ZOOM
-  ========================================================
-  */
-
-  function updateZoom() {
-
-    mapStage.style.transform =
-      `scale(${currentZoom})`;
-
-    zoomLevel.textContent =
-      Math.round(currentZoom * 100) + "%";
-
-  }
-
-  function zoomIn() {
-
-    if (currentZoom < 2) {
-
-      currentZoom += 0.1;
-
-      updateZoom();
-
-    }
-
-  }
-
-  function zoomOut() {
-
-    if (currentZoom > 0.5) {
-
-      currentZoom -= 0.1;
-
-      updateZoom();
-
-    }
-
-  }
-
-
-  /*
-  ========================================================
-  RESET MAP
-  ========================================================
-  */
-
-  function resetMap() {
-
-    currentZoom = 1;
-
-    currentCategory = "all";
-
-    searchInput.value = "";
+    document
+      .getElementById("exploreNav")
+      .addEventListener("click", showExplorer);
 
     document
-      .querySelectorAll(".filter-button")
-      .forEach(btn =>
-        btn.classList.remove("active")
-      );
+      .getElementById("brandHome")
+      .addEventListener("click", showExplorer);
 
-    document
-      .querySelector(
-        '.filter-button[data-category="all"]'
-      )
-      .classList.add("active");
+    function openDirectory(category) {
+      explorerView.classList.add("hidden");
+      directoryView.classList.remove("hidden");
 
-    updateZoom();
+      document.querySelectorAll(".nav-link").forEach(link => {
+        link.classList.toggle(
+          "active",
+          link.dataset.directory === category
+        );
+      });
 
-    renderFacilityDots();
+      const info = CATEGORY_INFO[category];
 
-    document
-      .getElementById("mapViewport")
-      .scrollTo({
+      document.getElementById("directoryTitle").textContent =
+        info?.label || capitalize(category);
+
+      document.getElementById("directoryDescription").textContent =
+        info?.description || "";
+
+      renderDirectory(category);
+
+      window.scrollTo({
         top: 0,
-        left: 0,
         behavior: "smooth"
       });
+    }
 
-  }
+    function showExplorer() {
+      directoryView.classList.add("hidden");
+      explorerView.classList.remove("hidden");
 
+      document.querySelectorAll(".nav-link").forEach(link => {
+        link.classList.toggle(
+          "active",
+          link.id === "exploreNav"
+        );
+      });
 
-  /*
-  ========================================================
-  START WEBSITE
-  ========================================================
-  */
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
 
-  loadFloor("2F");
+    /* =========================================================
+       DIRECTORY CARDS
+       ========================================================= */
 
-</script>
+    function renderDirectory(category) {
+      const grid =
+        document.getElementById("directoryGrid");
+
+      const facilities =
+        FACILITIES.filter(
+          facility =>
+            facility.category === category
+        );
+
+      if (!facilities.length) {
+        grid.innerHTML = `
+          <div class="directory-empty">
+            Facility listings for this category can be added here
+            as the remaining floors are completed.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML =
+        facilities
+          .map(facility => `
+            <article
+              class="directory-card"
+              data-directory-facility="${facility.id}"
+              tabindex="0"
+            >
+
+              <div class="directory-image">
+
+                ${
+                  facility.image
+                    ? `
+                      <img
+                        src="${escapeAttribute(facility.image)}"
+                        alt="${escapeAttribute(facility.name)}"
+                      />
+                    `
+                    : "Facility Photo"
+                }
+
+              </div>
+
+              <div class="directory-card-body">
+
+                <div class="directory-category">
+                  ${escapeHTML(
+                    CATEGORY_INFO[facility.category]?.label ||
+                    facility.category
+                  )}
+                </div>
+
+                <h2 class="directory-facility-name">
+                  ${escapeHTML(facility.name)}
+                </h2>
+
+                <div class="directory-floor">
+                  ${facility.floor}
+                </div>
+
+              </div>
+
+            </article>
+          `)
+          .join("");
+
+      grid
+        .querySelectorAll("[data-directory-facility]")
+        .forEach(card => {
+
+          const open = () => {
+            const facility =
+              FACILITIES.find(
+                item =>
+                  item.id === card.dataset.directoryFacility
+              );
+
+            if (!facility) return;
+
+            showExplorer();
+
+            state.category = "all";
+
+            document.querySelectorAll(".filter-button").forEach(filter => {
+              filter.classList.toggle(
+                "active",
+                filter.dataset.category === "all"
+              );
+            });
+
+            if (facility.floor !== state.floor) {
+              loadFloor(facility.floor);
+
+              floorPlanImage.addEventListener(
+                "load",
+                () => {
+                  openFacility(facility.id);
+                },
+                { once: true }
+              );
+            } else {
+              renderMarkers();
+              openFacility(facility.id);
+            }
+          };
+
+          card.addEventListener("click", open);
+
+          card.addEventListener("keydown", event => {
+            if (
+              event.key === "Enter" ||
+              event.key === " "
+            ) {
+              event.preventDefault();
+              open();
+            }
+          });
+        });
+    }
+
+    /* =========================================================
+       ZOOM
+       ========================================================= */
+
+    const MIN_ZOOM = 0.65;
+    const MAX_ZOOM = 1.8;
+    const ZOOM_STEP = 0.1;
+
+    document
+      .getElementById("zoomInButton")
+      .addEventListener("click", () => {
+        setZoom(state.zoom + ZOOM_STEP);
+      });
+
+    document
+      .getElementById("zoomOutButton")
+      .addEventListener("click", () => {
+        setZoom(state.zoom - ZOOM_STEP);
+      });
+
+    function setZoom(value) {
+      state.zoom =
+        Math.min(
+          MAX_ZOOM,
+          Math.max(MIN_ZOOM, value)
+        );
+
+      mapStage.style.transform =
+        `scale(${state.zoom})`;
+    }
+
+    function resetZoom() {
+      state.zoom = 1;
+      mapStage.style.transform = "scale(1)";
+
+      mapViewport.scrollTo({
+        left: 0,
+        top: 0
+      });
+    }
+
+    mapViewport.addEventListener(
+      "wheel",
+      event => {
+
+        if (
+          Math.abs(event.deltaY) <
+          Math.abs(event.deltaX)
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const direction =
+          event.deltaY > 0
+            ? -ZOOM_STEP
+            : ZOOM_STEP;
+
+        setZoom(state.zoom + direction);
+      },
+      { passive: false }
+    );
+
+    /* =========================================================
+       DRAG TO PAN
+       ========================================================= */
+
+    mapViewport.addEventListener("pointerdown", event => {
+      if (
+        event.button !== 0 ||
+        event.target.closest(".marker")
+      ) {
+        return;
+      }
+
+      state.isDragging = true;
+
+      state.dragStartX = event.clientX;
+      state.dragStartY = event.clientY;
+
+      state.scrollStartLeft =
+        mapViewport.scrollLeft;
+
+      state.scrollStartTop =
+        mapViewport.scrollTop;
+
+      mapViewport.classList.add("dragging");
+      mapViewport.setPointerCapture(event.pointerId);
+    });
+
+    mapViewport.addEventListener("pointermove", event => {
+      if (!state.isDragging) return;
+
+      const dx =
+        event.clientX -
+        state.dragStartX;
+
+      const dy =
+        event.clientY -
+        state.dragStartY;
+
+      mapViewport.scrollLeft =
+        state.scrollStartLeft - dx;
+
+      mapViewport.scrollTop =
+        state.scrollStartTop - dy;
+    });
+
+    function stopDragging() {
+      state.isDragging = false;
+      mapViewport.classList.remove("dragging");
+    }
+
+    mapViewport.addEventListener("pointerup", stopDragging);
+    mapViewport.addEventListener("pointercancel", stopDragging);
+
+    /* =========================================================
+       HOW TO USE
+       ========================================================= */
+
+    const howModal =
+      document.getElementById("howModal");
+
+    document
+      .getElementById("howButton")
+      .addEventListener("click", () => {
+        howModal.classList.remove("hidden");
+      });
+
+    /* =========================================================
+       BUILDING OVERVIEW
+       ========================================================= */
+
+    const buildingModal =
+      document.getElementById("buildingModal");
+
+    const buildingOverviewButtons =
+      document.getElementById("buildingOverviewButtons");
+
+    const overviewFloors =
+      ["5F","4F","3F","2F","1F","B1","B2","B3"];
+
+    buildingOverviewButtons.innerHTML =
+      overviewFloors
+        .map(floor => `
+          <button
+            type="button"
+            data-overview-floor="${floor}"
+            style="
+              padding:13px 8px;
+              border:1px solid #cfc8bf;
+              border-radius:6px;
+              background:white;
+              color:#173a60;
+              font-weight:700;
+            "
+          >
+            ${floor}
+          </button>
+        `)
+        .join("");
+
+    document
+      .getElementById("buildingButton")
+      .addEventListener("click", () => {
+        buildingModal.classList.remove("hidden");
+      });
+
+    buildingOverviewButtons
+      .querySelectorAll("[data-overview-floor]")
+      .forEach(button => {
+        button.addEventListener("click", () => {
+          buildingModal.classList.add("hidden");
+          loadFloor(button.dataset.overviewFloor);
+        });
+      });
+
+    /* =========================================================
+       MODAL CLOSE
+       ========================================================= */
+
+    document.querySelectorAll("[data-close-modal]").forEach(button => {
+      button.addEventListener("click", () => {
+        button
+          .closest(".modal-backdrop")
+          .classList.add("hidden");
+      });
+    });
+
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+      backdrop.addEventListener("click", event => {
+        if (event.target === backdrop) {
+          backdrop.classList.add("hidden");
+        }
+      });
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        document
+          .querySelectorAll(".modal-backdrop")
+          .forEach(modal => {
+            modal.classList.add("hidden");
+          });
+
+        searchResults.classList.add("hidden");
+      }
+    });
+
+    /* =========================================================
+       PANEL BUTTONS
+
+       These are intentionally ready for future content.
+       ========================================================= */
+
+    document
+      .getElementById("viewDetailsButton")
+      .addEventListener("click", () => {
+        const facility =
+          FACILITIES.find(
+            item =>
+              item.id === state.selectedFacilityId
+          );
+
+        if (!facility) return;
+
+        alert(
+          `${facility.name}\n\nDetailed facility information can be connected here later.`
+        );
+      });
+
+    document
+      .getElementById("viewPhotosButton")
+      .addEventListener("click", () => {
+        const facility =
+          FACILITIES.find(
+            item =>
+              item.id === state.selectedFacilityId
+          );
+
+        if (!facility) return;
+
+        if (!facility.image) {
+          alert(
+            `Photos for ${facility.name} can be added later.`
+          );
+          return;
+        }
+
+        window.open(
+          facility.image,
+          "_blank",
+          "noopener,noreferrer"
+        );
+      });
+
+    /* =========================================================
+       HELPERS
+       ========================================================= */
+
+    function capitalize(value) {
+      return (
+        value.charAt(0).toUpperCase() +
+        value.slice(1)
+      );
+    }
+
+    function escapeHTML(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttribute(value) {
+      return escapeHTML(value);
+    }
+
+    /* =========================================================
+       START
+       ========================================================= */
+
+    loadFloor("2F");
+
+  </script>
 
 </body>
 </html>
